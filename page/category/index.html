@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css"> <!-- main style -->
+    <link rel="stylesheet" href="style.css">
+    <title>Craft Market</title>
+</head>
+<body>
+    <!-- !Navigation -->
+    <div class="topnav">
+        <a class="active" href="/index.html">Home</a>
+        <a href="#">Product</a>
+        <a id="contactBtn">Contact</a>
+        <a href="/index.html#about">About</a>
+        <button id="supportBtn" class="btn-support">Tech support</button>
+    </div>
+
+    <!-- !Category -->  
+    <h2 id="top-sales">Category</h2>
+    <div class="product-list">
+        <article class="product" id="tinctures">
+            <img src="image/nastoyanka-limonno-imbirna-51524065250238.webp" alt="Tinctures" class="product-image">
+            <h2 class="product-title">Tinctures</h2>
+        </article>
+        <article class="product" id="liqueurs">
+            <img src="image/liker-shokoladniy-32292999482271.webp" alt="Liqueurs" class="product-image">
+            <h2 class="product-title">Liqueurs</h2>
+        </article>
+        <article class="product" id="appetizers">
+            <img src="image/basturma-z-yalovichini-200g-60867920091946.webp" alt="Appetizers" class="product-image">
+            <h2 class="product-title">Appetizers</h2>
+        </article>
+    </div>
+    
+    <!-- !Form -->
+    <div class="form-container" id="formContainer">
+        <div class="form-box">
+            <button class="form-close" id="closeForm">X</button>
+            <h2>Feedback form</h2>
+            <form id="supportForm">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Ваше имя" required>
+    
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Ваш email" required>
+    
+                <label for="message">Message</label>
+                <textarea id="message" name="message" placeholder="Ваше сообщение" rows="5" required></textarea>
+    
+                <button type="submit">Send</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- !Modal for Contacts -->
+    <div id="contactModal" class="modal-contact">
+        <div class="modal-content-contact">
+            <span class="close-button-contact" id="closeContactModal">&times;</span>
+            <h2>Contact Information</h2>
+            <p><strong>Phone:</strong> <span id="contact-phone">+380 (97) 537 890</span> <button class="copy-button" data-copy="#contact-phone">Copy</button></p>
+            <p><strong>Email:</strong> <span id="contact-email">morozov@craftmarket.com</span> <button class="copy-button" data-copy="#contact-email">Copy</button></p>
+            <p><strong>Address:</strong> <span id="contact-address">123 Craft St, Kyiv, Ukraine</span> <button class="copy-button" data-copy="#contact-address">Copy</button></p>
+        </div>
+    </div>
+
+    <!-- !Script modal contact -->
+    <script>
+        // Open and close modal logic
+        const contactBtn = document.getElementById('contactBtn');
+        const contactModal = document.getElementById('contactModal');
+        const closeContactModal = document.getElementById('closeContactModal');
+        
+        contactBtn.addEventListener('click', () => {
+            contactModal.classList.add('show');
+        });
+        
+        closeContactModal.addEventListener('click', () => {
+            contactModal.classList.remove('show');
+        });
+        
+        document.addEventListener('click', (e) => {
+            if (e.target === contactModal) {
+                contactModal.classList.remove('show');
+            }
+        });
+        
+        // Copy to clipboard logic
+        document.querySelectorAll('.copy-button').forEach(button => {
+            button.addEventListener('click', () => {
+                const targetSelector = button.getAttribute('data-copy');
+                const targetText = document.querySelector(targetSelector).textContent;
+                navigator.clipboard.writeText(targetText).then(() => {
+                    alert('Copied to clipboard: ' + targetText);
+                }).catch(err => {
+                    console.error('Failed to copy: ', err);
+                });
+            });
+        });
+    </script>
+<script src="main.js"></script>
+</body>
+</html>

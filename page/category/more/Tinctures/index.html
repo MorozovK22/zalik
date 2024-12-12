@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css"> <!-- main style -->
+    <link rel="stylesheet" href="/page/category/style.css"> <!--  additional style -->
+    <link rel="stylesheet" href="style.css">
+    <title>Craft Market</title>
+</head>
+<body>
+    <!-- !Navigation -->
+    <div class="topnav">
+        <a class="active" href="/index.html">Home</a>
+        <a href="/page/category/index.html">Product</a>
+        <a id="contactBtn">Contact</a>
+        <a href="/index.html#about">About</a>
+        <button id="supportBtn" class="btn-support">Tech support</button>
+    </div>
+
+    <!-- !Category -->  
+    <h2 id="top-sales">Tincture:</h2>
+    <div class="product-list">
+        <article class="product" onclick="openModal('Cherry tincture', 4.9)">
+            <img src="image/nastoyanka-vishnivka-79584010030651.webp" alt="nastoyanka-vishnivka" class="product-image">
+            <h2 class="product-title">Cherry tincture 0.5l</h2>
+            <p class="product-price">Price: 4.9$</p>
+        </article>
+        <article class="product" onclick="openModal('Tincture Klyukovka', 5.9)">
+            <img src="image/nastoyanka-zhuravlina-20744788640853.webp" alt="nastoyanka-zhuravlina" class="product-image">
+            <h2 class="product-title">Tincture Klyukovka 0.5l</h2>
+            <p class="product-price">Price: 5.9$</p>
+        </article>
+        <article class="product" onclick="openModal('Anise tincture', 5.7)">
+            <img src="image/nastoyanka-anisivka-67593015078188.webp" alt="nastoyanka-anisivka" class="product-image">
+            <h2 class="product-title">Anise tincture 0.5l</h2>
+            <p class="product-price">Price: 5.7$</p>
+        </article>
+    </div>
+    
+    <!-- !Form -->
+    <div class="form-container" id="formContainer">
+        <div class="form-box">
+            <button class="form-close" id="closeForm">X</button>
+            <h2>Feedback form</h2>
+            <form id="supportForm">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Ваше имя" required>
+    
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Ваш email" required>
+    
+                <label for="message">Message</label>
+                <textarea id="message" name="message" placeholder="Ваше сообщение" rows="5" required></textarea>
+    
+                <button type="submit">Send</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- !Modal buy -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h2 id="modal-title"></h2>
+            <p id="modal-price"></p>
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" min="1" value="1">
+            <button class="buy-btn" onclick="closeModal()">Buy Now</button>
+        </div>
+    </div>
+
+    <!-- !Modal for Contacts -->
+    <div id="contactModal" class="modal-contact">
+        <div class="modal-content-contact">
+            <span class="close-button-contact" id="closeContactModal">&times;</span>
+            <h2>Contact Information</h2>
+            <p><strong>Phone:</strong> <span id="contact-phone">+380 (97) 537 890</span> <button class="copy-button" data-copy="#contact-phone">Copy</button></p>
+            <p><strong>Email:</strong> <span id="contact-email">morozov@craftmarket.com</span> <button class="copy-button" data-copy="#contact-email">Copy</button></p>
+            <p><strong>Address:</strong> <span id="contact-address">123 Craft St, Kyiv, Ukraine</span> <button class="copy-button" data-copy="#contact-address">Copy</button></p>
+        </div>
+    </div>
+
+    <!-- !Script modal contact -->
+    <script>
+        // Open and close modal logic
+        const contactBtn = document.getElementById('contactBtn');
+        const contactModal = document.getElementById('contactModal');
+        const closeContactModal = document.getElementById('closeContactModal');
+        
+        contactBtn.addEventListener('click', () => {
+            contactModal.classList.add('show');
+        });
+        
+        closeContactModal.addEventListener('click', () => {
+            contactModal.classList.remove('show');
+        });
+        
+        document.addEventListener('click', (e) => {
+            if (e.target === contactModal) {
+                contactModal.classList.remove('show');
+            }
+        });
+        
+        // Copy to clipboard logic
+        document.querySelectorAll('.copy-button').forEach(button => {
+            button.addEventListener('click', () => {
+                const targetSelector = button.getAttribute('data-copy');
+                const targetText = document.querySelector(targetSelector).textContent;
+                navigator.clipboard.writeText(targetText).then(() => {
+                    alert('Copied to clipboard: ' + targetText);
+                }).catch(err => {
+                    console.error('Failed to copy: ', err);
+                });
+            });
+        });
+    </script>
+    <script src="/page/category/main.js"></script>
+</body>
+</html>

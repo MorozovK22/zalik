@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css"> <!-- main style -->
+    <link rel="stylesheet" href="/page/category/style.css"> <!--  additional style -->
+    <link rel="stylesheet" href="style.css">
+    <title>Craft Market</title>
+</head>
+<body>
+    <!-- !Navigation -->
+    <div class="topnav">
+        <a class="active" href="/index.html">Home</a>
+        <a href="/page/category/index.html">Product</a>
+        <a id="contactBtn">Contact</a>
+        <a href="/index.html#about">About</a>
+        <button id="supportBtn" class="btn-support">Tech support</button>
+    </div>
+
+    <!-- !Category -->  
+    <h2 id="top-sales">Appetizers:</h2>
+    <div class="product-list">
+        <article class="product" onclick="openModal('Beef Basturma', 3.5)">
+            <img src="image/basturma-z-yalovichini-200g-60867920091946.webp" alt="basturma-z-yalovichini" class="product-image">
+            <h2 class="product-title">Beef Basturma 200g</h2>
+            <p class="product-price">Price: 3.5$</p>
+        </article>
+        <article class="product" onclick="openModal('Horse meat basturma', 3.35)">
+            <img src="image/basturma-z-konyny-250h-23425985325521.webp" alt="basturma-z-konyny" class="product-image">
+            <h2 class="product-title">Horse meat basturma 250g</h2>
+            <p class="product-price">Price: 3.35$</p>
+        </article>
+        <article class="product" onclick="openModal('Sausage', 3.95)">
+            <img src="image/sudzhuk-200g-57798721992051.webp" alt="sudzhuk" class="product-image">
+            <h2 class="product-title">Sausage 250g</h2>
+            <p class="product-price">Price: 3.95$</p>
+        </article>
+        <article class="product" onclick="openModal('Chicken fillet', 3.83)">
+            <img src="image/file-kurky-150h-69404897938209.webp" alt="file-kurky" class="product-image">
+            <h2 class="product-title">Chicken fillet 150g</h2>
+            <p class="product-price">Price: 3.83$</p>
+        </article>
+        <article class="product" onclick="openModal('Turhan', 3.82)">
+            <img src="image/turkhan-250-h.-77556515459913.webp" alt="turkhan" class="product-image">
+            <h2 class="product-title">Turhan 250g</h2>
+            <p class="product-price">Price: 3.82$</p>
+        </article>
+    </div>
+    
+    <!-- !Form -->
+    <div class="form-container" id="formContainer">
+        <div class="form-box">
+            <button class="form-close" id="closeForm">X</button>
+            <h2>Feedback form</h2>
+            <form id="supportForm">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Ваше имя" required>
+    
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Ваш email" required>
+    
+                <label for="message">Message</label>
+                <textarea id="message" name="message" placeholder="Ваше сообщение" rows="5" required></textarea>
+    
+                <button type="submit">Send</button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- !Modal buy -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h2 id="modal-title"></h2>
+            <p id="modal-price"></p>
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" min="1" value="1">
+            <button class="buy-btn" onclick="closeModal()">Buy Now</button>
+        </div>
+    </div>
+
+        <!-- !Modal for Contacts -->
+    <div id="contactModal" class="modal-contact">
+        <div class="modal-content-contact">
+            <span class="close-button-contact" id="closeContactModal">&times;</span>
+            <h2>Contact Information</h2>
+            <p><strong>Phone:</strong> <span id="contact-phone">+380 (97) 537 890</span> <button class="copy-button" data-copy="#contact-phone">Copy</button></p>
+            <p><strong>Email:</strong> <span id="contact-email">morozov@craftmarket.com</span> <button class="copy-button" data-copy="#contact-email">Copy</button></p>
+            <p><strong>Address:</strong> <span id="contact-address">123 Craft St, Kyiv, Ukraine</span> <button class="copy-button" data-copy="#contact-address">Copy</button></p>
+        </div>
+    </div>
+
+    <!-- !Script modal contact -->
+    <script>
+        // Open and close modal logic
+        const contactBtn = document.getElementById('contactBtn');
+        const contactModal = document.getElementById('contactModal');
+        const closeContactModal = document.getElementById('closeContactModal');
+        
+        contactBtn.addEventListener('click', () => {
+            contactModal.classList.add('show');
+        });
+        
+        closeContactModal.addEventListener('click', () => {
+            contactModal.classList.remove('show');
+        });
+        
+        document.addEventListener('click', (e) => {
+            if (e.target === contactModal) {
+                contactModal.classList.remove('show');
+            }
+        });
+        
+        // Copy to clipboard logic
+        document.querySelectorAll('.copy-button').forEach(button => {
+            button.addEventListener('click', () => {
+                const targetSelector = button.getAttribute('data-copy');
+                const targetText = document.querySelector(targetSelector).textContent;
+                navigator.clipboard.writeText(targetText).then(() => {
+                    alert('Copied to clipboard: ' + targetText);
+                }).catch(err => {
+                    console.error('Failed to copy: ', err);
+                });
+            });
+        });
+    </script>
+    <script src="/page/category/main.js"></script>
+</body>
+</html>
